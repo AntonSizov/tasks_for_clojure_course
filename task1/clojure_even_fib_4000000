@@ -1,0 +1,17 @@
+#!/usr/bin/env escript
+%% -*- erlang -*-
+
+-define(max, 4000000).
+
+main(_) ->
+	io:format("Start...~n", []),
+	sum_even_fib(1,2,0).
+
+sum_even_fib(_Prev, Last, Sum) when Last >= ?max ->
+	io:format("Found sum: ~p~n", [Sum]);
+sum_even_fib(Prev, Last, Sum) ->
+	Next = Prev + Last,
+	case (Last rem 2) =:= 0 of %% even check
+		true -> sum_even_fib(Last, Next, Sum + Last); %% even
+		false -> sum_even_fib(Last, Next, Sum) %% not even
+	end.

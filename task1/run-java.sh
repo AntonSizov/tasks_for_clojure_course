@@ -1,0 +1,1 @@
+javac ./task1.java && java task1

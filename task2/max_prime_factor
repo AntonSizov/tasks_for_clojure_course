@@ -1,0 +1,36 @@
+#!/usr/bin/env escript
+%% -*- erlang -*-
+
+-define(n, 600851475143).
+
+main(_) ->
+	io:format("Start... ~n", []),
+	process(?n, 2).
+
+process(1, MaxPrimeFactor) ->
+	io:format("Max prime: ~p~n", [MaxPrimeFactor]);
+process(N, Prime) ->
+	case (N rem Prime) =:= 0 of
+		true ->
+			io:format("~p / ~p = ~p~n", [N, Prime, trunc(N/Prime)]),
+			process(trunc(N/Prime), Prime);
+		false ->
+			process(N, next_prime(Prime))
+	end.
+
+next_prime(Prime) ->
+	Next = Prime + 1,
+	case is_prime(Next) of
+		true -> Next;
+		false -> next_prime(Next)
+	end.
+
+is_prime(N) ->
+	is_prime(N, 2, trunc(math:sqrt(N)) + 1).
+is_prime(_, Divider, Limit) when Divider > Limit ->
+	true;
+is_prime(N, Divider, Limit) ->
+	case (N rem Divider) =:= 0 of
+		true -> false;
+		false -> is_prime(N, Divider + 1, Limit)
+	end.

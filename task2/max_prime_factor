@@ -2,6 +2,7 @@
 %% -*- erlang -*-
 
 -define(n, 600851475143).
+-mode(native).
 
 main(_) ->
 	io:format("Start... ~n", []),

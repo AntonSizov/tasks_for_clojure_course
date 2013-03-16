@@ -1,6 +1,8 @@
 function isPrime(n){
+	var sqrtN = Math.round(Math.sqrt(n)) + 1;
+
     if(n==1) return false;
-    for(var d=2; d*d<=n; d++){
+    for(var d=2; d <= sqrtN; d++){
         if(n%d==0) return false;
     };
     return true;
